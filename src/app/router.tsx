@@ -1,4 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom';
+import DrumKit from 'src/pages/drum-kit';
 import Home from 'src/pages/home';
 
 const router = createBrowserRouter([
@@ -8,7 +9,7 @@ const router = createBrowserRouter([
 	},
 	{
 		path: 'drum-kit',
-		element: <div>Drum Kit</div>,
+		element: <DrumKit />,
 	},
 ]);
 

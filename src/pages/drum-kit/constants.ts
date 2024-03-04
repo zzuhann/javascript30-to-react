@@ -1,4 +1,4 @@
-const firebaseStorageDomain = process.env.FIREBASE_STORAGE_DOMAIN;
+const firebaseStorageDomain = process.env.REACT_APP_FIREBASE_STORAGE_DOMAIN;
 export const drumData = [
 	{
 		keyboardKey: 'A',

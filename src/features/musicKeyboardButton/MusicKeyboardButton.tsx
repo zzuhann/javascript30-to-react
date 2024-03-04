@@ -9,7 +9,6 @@ type Props = {
 export const MusicKeyboardButton = ({ keyboardKey, description, soundUrl }: Props) => {
 	const soundRef = useRef<HTMLAudioElement>(null);
 	const playSound = (key: string) => {
-		console.log(key);
 		if (key.toUpperCase() !== keyboardKey) return;
 		soundRef.current?.play();
 	};
@@ -27,7 +26,6 @@ export const MusicKeyboardButton = ({ keyboardKey, description, soundUrl }: Prop
 			<p>{keyboardKey}</p>
 			<p>{description}</p>
 			<audio src={soundUrl} ref={soundRef} />
-			<p className='hidden'>{soundUrl}</p>
 		</button>
 	);
 };

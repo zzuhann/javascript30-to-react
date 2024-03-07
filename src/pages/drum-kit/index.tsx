@@ -1,19 +1,11 @@
-import { MusicKeyboardButton } from 'src/features/musicKeyboardButton';
-import { drumData } from './constants';
+import { DrumKit } from 'src/features/recording-drum';
 
-const DrumKit = () => {
+const DrumKitPage = () => {
 	return (
-		<div className='flex gap-4'>
-			{drumData.map((drum) => (
-				<MusicKeyboardButton
-					key={drum.keyboardKey}
-					keyboardKey={drum.keyboardKey}
-					description={drum.description}
-					soundUrl={drum.soundUrl}
-				/>
-			))}
+		<div className='flex justify-center items-center w-screen h-screen'>
+			<DrumKit />
 		</div>
 	);
 };
 
-export default DrumKit;
+export default DrumKitPage;

@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { drumData } from './constants';
+import { playSound } from './utils';
 
 type Props = {
 	keyboardKey: string;
@@ -11,30 +12,25 @@ const MusicKeyboardButton = ({ keyboardKey, description, soundUrl }: Props) => {
 	const soundRef = useRef<HTMLAudioElement>(null);
 	const buttonRef = useRef<HTMLButtonElement>(null);
 
-	const resetButtonStyle = () => {
-		buttonRef.current?.style.removeProperty('border-color');
-		buttonRef.current?.style.removeProperty('box-shadow');
-		buttonRef.current?.style.removeProperty('transform');
-	};
-
-	const playSound = (key: string) => {
-		resetButtonStyle();
-		if (key.toUpperCase() !== keyboardKey) return;
-		soundRef.current?.play();
-		buttonRef.current?.style.setProperty('border-color', '#ffc600');
-		buttonRef.current?.style.setProperty('box-shadow', '0 0 1rem #ffc600');
-		buttonRef.current?.style.setProperty('transform', 'scale(1.1)');
-
-		setTimeout(() => {
-			resetButtonStyle();
-		}, 200);
-	};
-
 	useEffect(() => {
-		window.addEventListener('keydown', (e) => playSound(e.key));
+		window.addEventListener('keydown', (e) =>
+			playSound({
+				key: e.key,
+				soundRef,
+				buttonRef,
+				keyboardKey,
+			}),
+		);
 
 		return () => {
-			window.removeEventListener('keydown', (e) => playSound(e.key));
+			window.removeEventListener('keydown', (e) =>
+				playSound({
+					key: e.key,
+					soundRef,
+					buttonRef,
+					keyboardKey,
+				}),
+			);
 		};
 	}, []);
 

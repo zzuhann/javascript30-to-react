@@ -9,9 +9,25 @@ type Props = {
 
 const MusicKeyboardButton = ({ keyboardKey, description, soundUrl }: Props) => {
 	const soundRef = useRef<HTMLAudioElement>(null);
+	const buttonRef = useRef<HTMLButtonElement>(null);
+
+	const resetButtonStyle = () => {
+		buttonRef.current?.style.removeProperty('border-color');
+		buttonRef.current?.style.removeProperty('box-shadow');
+		buttonRef.current?.style.removeProperty('transform');
+	};
+
 	const playSound = (key: string) => {
+		resetButtonStyle();
 		if (key.toUpperCase() !== keyboardKey) return;
 		soundRef.current?.play();
+		buttonRef.current?.style.setProperty('border-color', '#ffc600');
+		buttonRef.current?.style.setProperty('box-shadow', '0 0 1rem #ffc600');
+		buttonRef.current?.style.setProperty('transform', 'scale(1.1)');
+
+		setTimeout(() => {
+			resetButtonStyle();
+		}, 200);
 	};
 
 	useEffect(() => {
@@ -23,7 +39,10 @@ const MusicKeyboardButton = ({ keyboardKey, description, soundUrl }: Props) => {
 	}, []);
 
 	return (
-		<button className='border-solid border-2 border-gray-800 w-24 h-24 rounded-md'>
+		<button
+			className='border-solid border-2 border-gray-800 w-24 h-24 rounded-md duration-100'
+			ref={buttonRef}
+		>
 			<p>{keyboardKey}</p>
 			<p>{description}</p>
 			<audio src={soundUrl} ref={soundRef} />
